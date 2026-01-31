@@ -1,0 +1,10 @@
+.cloud/
+.storage/
+blueprints/
+custom_components/
+deps/
+tts/
+.ha_run.lock
+.HA_VERSION
+home-assistant*
+secrets.yaml

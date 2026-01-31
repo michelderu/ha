@@ -1,0 +1,129 @@
+input_boolean:
+  # Automation switch om de status van het rooster bij te houden
+  aut_slaapkamer_luchtrooster_status:
+    name: Slaapkamer Luchtrooster Status (Automation Helper)
+    icon: mdi:window-open-variant
+    
+template:
+  # Air quality sensors voor slaapkamer Paula en Michel
+  - sensor:
+      - name: "Slaapkamer Luchtkwaliteit Score"
+        unique_id: slaapkamer_air_quality_score
+        unit_of_measurement: "%"
+        icon: mdi:air-filter
+        state: >-
+          {% set co2 = states('sensor.alpstuga_air_quality_monitor_kooldioxide') | int(0) %}
+          {% set pm25 = states('sensor.alpstuga_air_quality_monitor_pm2_5') | float(0) %}
+          {% set hum = states('sensor.alpstuga_air_quality_monitor_luchtvochtigheid') | float(0) %}
+          {% set score = 100 %}
+          
+          {# CO2 penalty #}
+          {% if co2 > 2000 %}{% set score = score - 50 %}
+          {% elif co2 > 1000 %}{% set score = score - 30 %}
+          {% elif co2 > 800 %}{% set score = score - 15 %}{% endif %}
+          
+          {# PM2.5 penalty #}
+          {% if pm25 > 25 %}{% set score = score - 25 %}
+          {% elif pm25 > 15 %}{% set score = score - 10 %}{% endif %}
+          
+          {# Humidity penalty #}
+          {% if hum > 65 or hum < 30 %}{% set score = score - 15 %}{% endif %}
+          
+          {{ [score, 0] | max }}
+        
+      - name: "Slaapkamer Ventilatie Advies"
+        unique_id: slaapkamer_ventilatie_advies
+        icon: mdi:window-open-variant
+        state: >-
+          {% set co2 = states('sensor.alpstuga_air_quality_monitor_kooldioxide') | int(0) %}
+          {% set pm25 = states('sensor.alpstuga_air_quality_monitor_pm2_5') | float(0) %}
+          {% if co2 > 1000 or pm25 > 25 %}Rooster OPEN
+          {% elif co2 < 600 and pm25 < 15 %}Rooster DICHT
+          {% else %}Geen actie{% endif %}
+
+automation:
+  # Notificatie om het slaapkamer rooster open te doen
+  - alias: "Slaapkamer: Slimme Ventilatie Assistent"
+    description: Intelligente luchtkwaliteitsmonitoring met meerdere parameters
+    triggers:
+      # Check lucht kwaliteit iedere 5 minuten
+      - trigger: time_pattern
+        minutes: "/5"
+
+    conditions:
+      - condition: time
+        after: "07:00:00"
+        before: "22:00:00"
+
+    actions:
+      - variables:
+          co2: "{{ states('sensor.alpstuga_air_quality_monitor_kooldioxide') | int(0) }}"
+          pm25: "{{ states('sensor.alpstuga_air_quality_monitor_pm2_5') | float(0) }}"
+          temp: "{{ states('sensor.alpstuga_air_quality_monitor_temperatuur') | float(0) }}"
+          humidity: "{{ states('sensor.alpstuga_air_quality_monitor_luchtvochtigheid') | float(0) }}"
+          rooster_open: "{{ is_state('input_boolean.aut_slaapkamer_luchtrooster_status', 'on') }}"
+          
+          # Wanneer is het tijd om open te doen
+          co2_high: "{{ co2 > 1000 }}"
+          pm25_high: "{{ pm25 > 25 }}"
+          temp_high: "{{ temp > 23 }}"
+          humidity_high: "{{ humidity > 65 }}"
+          
+          # Wanneer is het tijd om dicht te doen
+          co2_ok: "{{ co2 < 600 }}"
+          pm25_ok: "{{ pm25 < 15 }}"
+          temp_ok: "{{ temp < 21 }}"
+          humidity_ok: "{{ humidity < 55 }}"
+          
+          # Beslissingslogica
+          should_open: "{{ co2_high or pm25_high or (temp_high and humidity_high) }}"
+          can_close: "{{ co2_ok and pm25_ok and (temp_ok or humidity_ok) }}"
+          
+          # Bouw bericht op
+          reasons: >-
+            {% set r = [] %}
+            {% if co2_high %}{% set r = r + ['CO2 te hoog (' + co2|string + ' ppm)'] %}{% endif %}
+            {% if pm25_high %}{% set r = r + ['Fijnstof te hoog (' + pm25|string + ' µg/m³)'] %}{% endif %}
+            {% if temp_high %}{% set r = r + ['Te warm (' + temp|string + '°C)'] %}{% endif %}
+            {% if humidity_high %}{% set r = r + ['Te vochtig (' + humidity|string + '%)'] %}{% endif %}
+            {{ r | join(', ') }}
+
+      - choose:
+          # Moet dicht en momenteel open
+          - conditions:
+              - "{{ should_open and not rooster_open }}"
+            sequence:
+              - action: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.aut_slaapkamer_luchtrooster_status
+              - action: notify.mobile_app_sm_s916b
+                data:
+                  title: "🪟 Slaapkamer: Rooster OPEN"
+                  message: "{{ reasons }}"
+                  data:
+                    channel: ventilation_alerts
+                    importance: high
+                    actions:
+                      - action: "OPEN_DONE"
+                        title: "✓ Gedaan"
+                      - action: "SNOOZE_30"
+                        title: "⏰ Herinner over 30 min"
+                        
+          # Kan dicht en momenteel open
+          - conditions:
+              - "{{ can_close and rooster_open }}"
+            sequence:
+              - action: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.aut_slaapkamer_luchtrooster_status
+              - action: notify.mobile_app_sm_s916b
+                data:
+                  title: "🪟 Slaapkamer: Rooster DICHT"
+                  message: >-
+                    Luchtkwaliteit is goed: CO2 {{ co2 }} ppm, 
+                    PM2.5 {{ pm25 }} µg/m³, {{ temp }}°C, {{ humidity }}%
+                  data:
+                    channel: ventilation_alerts
+                    importance: default
+
+    mode: single
