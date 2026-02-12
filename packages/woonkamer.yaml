@@ -37,8 +37,8 @@ template:
         state: >-
           {% set co2 = states('sensor.view_plus_kooldioxide') | int(0) %}
           {% set pm25 = states('sensor.view_plus_pm2_5') | float(0) %}
-          {% if co2 > 1000 or pm25 > 25 %}Luchten starten
-          {% elif co2 < 600 and pm25 < 15 %}Luchten eindigen
+          {% if co2 > 1000 or pm25 > 25 %}Ventileren starten
+          {% elif co2 < 600 and pm25 < 15 %}Voldoende geventileerd
           {% else %}Geen actie{% endif %}
 
 automation:
@@ -63,13 +63,13 @@ automation:
           humidity: "{{ states('sensor.view_plus_luchtvochtigheid') | float(0) }}"
           luchten: "{{ is_state('input_boolean.aut_woonkamer_luchten_status', 'on') }}"
           
-          # Wanneer is het tijd om open te doen
+          # Wanneer is het tijd om te luchten
           co2_high: "{{ co2 > 1000 }}"
           pm25_high: "{{ pm25 > 25 }}"
           temp_high: "{{ temp > 23 }}"
           humidity_high: "{{ humidity > 65 }}"
           
-          # Wanneer is het tijd om dicht te doen
+          # Wanneer is het tijd om luchten te eindigen
           co2_ok: "{{ co2 < 600 }}"
           pm25_ok: "{{ pm25 < 15 }}"
           temp_ok: "{{ temp < 21 }}"
