@@ -1,0 +1,68 @@
+version: '3'
+services:
+
+  # Homeassistant
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    volumes:
+      - /home/pi/docker/homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+      - /dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0:/dev/ttyUSB1
+    group_add:
+      - dialout # To enable ttyUSB1
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    environment:
+      TZ: Europe/Amsterdam
+
+  # python-matter-server
+  matter-server:
+    image: ghcr.io/matter-js/python-matter-server:stable
+    container_name: matter-server
+    restart: unless-stopped
+    # Required for mDNS to work correctly
+    network_mode: host
+    security_opt:
+      # Needed for Bluetooth via dbus
+      - apparmor:unconfined
+    volumes:
+      - /home/pi/docker/matter-server/data:/data
+      # Required for Bluetooth via D-Bus
+      - /run/dbus:/run/dbus:ro
+    # If you adjust command line, make sure to pass the default CMD arguments too:
+    #command: --storage-path /data --paa-root-cert-dir /data/credentials --bluetooth-adapter 0
+
+  vscode:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: vscode
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /home/pi/docker/vscode/config:/config
+      - /home/pi:/workspace
+    ports:
+      - 8443:8443
+    restart: unless-stopped
+
+  # AdGuard Home
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    restart: unless-stopped
+    volumes:
+      - /home/pi/docker/adguard/work:/opt/adguardhome/work
+      - /home/pi/docker/adguard/conf:/opt/adguardhome/conf
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "3080:80/tcp"   # UI
+      - "443:443/tcp"
+      - "443:443/udp"
+      - "3000:3000/tcp" # Initial setup wizard
+      - "853:853/tcp"   # DNS-over-TLS
+      - "784:784/udp"   # DNS-over-QUIC
