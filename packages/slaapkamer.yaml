@@ -37,8 +37,8 @@ template:
         state: >-
           {% set co2 = states('sensor.alpstuga_air_quality_monitor_kooldioxide') | int(0) %}
           {% set pm25 = states('sensor.alpstuga_air_quality_monitor_pm2_5') | float(0) %}
-          {% if co2 > 1000 or pm25 > 25 %}Rooster OPEN
-          {% elif co2 < 600 and pm25 < 15 %}Rooster DICHT
+          {% if co2 > 1000 or pm25 > 25 %}Ventileren starten
+          {% elif co2 < 600 and pm25 < 15 %}Voldoende geventileerd
           {% else %}Geen actie{% endif %}
 
 automation:
@@ -98,7 +98,7 @@ automation:
                   entity_id: input_boolean.aut_slaapkamer_luchtrooster_status
               - action: notify.mobile_app_sm_s916b
                 data:
-                  title: "🪟 Slaapkamer: Rooster OPEN"
+                  title: "🪟 Slaapkamer: Rooster openen"
                   message: "{{ reasons }}"
                   data:
                     channel: ventilation_alerts
