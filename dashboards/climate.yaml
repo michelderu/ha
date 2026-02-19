@@ -1,0 +1,1188 @@
+views:
+  - title: Binnenklimaat
+    type: sections
+    max_columns: 1
+    sections:
+      - type: grid
+        card_mod:
+          style: |
+            ha-card {
+              max-width: 1200px;
+              margin: 0 auto;
+            }
+        cards:
+          - type: conditional
+            conditions:
+              - condition: not
+                conditions:
+                  - condition: or
+                    conditions:
+                      - condition: numeric_state
+                        entity: sensor.woonkamer_air_kooldioxide
+                        above: 999
+                      - condition: numeric_state
+                        entity: sensor.woonkamer_air_pm2_5
+                        above: 9.9
+                      - condition: numeric_state
+                        entity: sensor.woonkamer_air_luchtvochtigheid
+                        below: 40
+                      - condition: numeric_state
+                        entity: sensor.woonkamer_air_luchtvochtigheid
+                        above: 60
+                      - condition: numeric_state
+                        entity: sensor.woonkamer_air_temperatuur
+                        below: 12
+                      - condition: numeric_state
+                        entity: sensor.woonkamer_air_temperatuur
+                        above: 22
+                      - condition: numeric_state
+                        entity: sensor.paula_michel_air_kooldioxide
+                        above: 999
+                      - condition: numeric_state
+                        entity: sensor.paula_michel_air_pm2_5
+                        above: 9.9
+                      - condition: numeric_state
+                        entity: sensor.paula_michel_air_luchtvochtigheid
+                        below: 40
+                      - condition: numeric_state
+                        entity: sensor.paula_michel_air_luchtvochtigheid
+                        above: 60
+                      - condition: numeric_state
+                        entity: sensor.paula_michel_air_temperatuur
+                        below: 12
+                      - condition: numeric_state
+                        entity: sensor.paula_michel_air_temperatuur
+                        above: 22
+                      - condition: numeric_state
+                        entity: sensor.linde_air_kooldioxide
+                        above: 999
+                      - condition: numeric_state
+                        entity: sensor.linde_air_pm2_5
+                        above: 9.9
+                      - condition: numeric_state
+                        entity: sensor.linde_air_luchtvochtigheid
+                        below: 40
+                      - condition: numeric_state
+                        entity: sensor.linde_air_luchtvochtigheid
+                        above: 60
+                      - condition: numeric_state
+                        entity: sensor.linde_air_temperatuur
+                        below: 12
+                      - condition: numeric_state
+                        entity: sensor.linde_air_temperatuur
+                        above: 22
+                      - condition: numeric_state
+                        entity: sensor.jongens_air_kooldioxide
+                        above: 999
+                      - condition: numeric_state
+                        entity: sensor.jongens_air_pm2_5
+                        above: 9.9
+                      - condition: numeric_state
+                        entity: sensor.jongens_air_luchtvochtigheid
+                        below: 40
+                      - condition: numeric_state
+                        entity: sensor.jongens_air_luchtvochtigheid
+                        above: 60
+                      - condition: numeric_state
+                        entity: sensor.jongens_air_temperatuur
+                        below: 12
+                      - condition: numeric_state
+                        entity: sensor.jongens_air_temperatuur
+                        above: 22
+                      - condition: numeric_state
+                        entity: sensor.melanie_air_kooldioxide
+                        above: 999
+                      - condition: numeric_state
+                        entity: sensor.melanie_air_pm2_5
+                        above: 9.9
+                      - condition: numeric_state
+                        entity: sensor.melanie_air_luchtvochtigheid
+                        below: 40
+                      - condition: numeric_state
+                        entity: sensor.melanie_air_luchtvochtigheid
+                        above: 60
+                      - condition: numeric_state
+                        entity: sensor.melanie_air_temperatuur
+                        below: 12
+                      - condition: numeric_state
+                        entity: sensor.melanie_air_temperatuur
+                        above: 22
+                      - condition: numeric_state
+                        entity: sensor.merel_air_kooldioxide
+                        above: 999
+                      - condition: numeric_state
+                        entity: sensor.merel_air_pm2_5
+                        above: 9.9
+                      - condition: numeric_state
+                        entity: sensor.merel_air_luchtvochtigheid
+                        below: 40
+                      - condition: numeric_state
+                        entity: sensor.merel_air_luchtvochtigheid
+                        above: 60
+                      - condition: numeric_state
+                        entity: sensor.merel_air_temperatuur
+                        below: 12
+                      - condition: numeric_state
+                        entity: sensor.merel_air_temperatuur
+                        above: 22
+                      - condition: numeric_state
+                        entity: sensor.megan_air_kooldioxide
+                        above: 999
+                      - condition: numeric_state
+                        entity: sensor.megan_air_pm2_5
+                        above: 9.9
+                      - condition: numeric_state
+                        entity: sensor.megan_air_luchtvochtigheid
+                        below: 40
+                      - condition: numeric_state
+                        entity: sensor.megan_air_luchtvochtigheid
+                        above: 60
+                      - condition: numeric_state
+                        entity: sensor.megan_air_temperatuur
+                        below: 12
+                      - condition: numeric_state
+                        entity: sensor.megan_air_temperatuur
+                        above: 22
+            card:
+              type: heading
+              heading: Alles ziet er goed uit ✓
+              heading_style: title
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.woonkamer_air_kooldioxide
+                    above: 999
+                  - condition: numeric_state
+                    entity: sensor.woonkamer_air_pm2_5
+                    above: 9.9
+                  - condition: numeric_state
+                    entity: sensor.woonkamer_air_luchtvochtigheid
+                    below: 40
+                  - condition: numeric_state
+                    entity: sensor.woonkamer_air_luchtvochtigheid
+                    above: 60
+                  - condition: numeric_state
+                    entity: sensor.woonkamer_air_temperatuur
+                    below: 12
+                  - condition: numeric_state
+                    entity: sensor.woonkamer_air_temperatuur
+                    above: 22
+                  - condition: numeric_state
+                    entity: sensor.paula_michel_air_kooldioxide
+                    above: 999
+                  - condition: numeric_state
+                    entity: sensor.paula_michel_air_pm2_5
+                    above: 9.9
+                  - condition: numeric_state
+                    entity: sensor.paula_michel_air_luchtvochtigheid
+                    below: 40
+                  - condition: numeric_state
+                    entity: sensor.paula_michel_air_luchtvochtigheid
+                    above: 60
+                  - condition: numeric_state
+                    entity: sensor.paula_michel_air_temperatuur
+                    below: 12
+                  - condition: numeric_state
+                    entity: sensor.paula_michel_air_temperatuur
+                    above: 22
+                  - condition: numeric_state
+                    entity: sensor.linde_air_kooldioxide
+                    above: 999
+                  - condition: numeric_state
+                    entity: sensor.linde_air_pm2_5
+                    above: 9.9
+                  - condition: numeric_state
+                    entity: sensor.linde_air_luchtvochtigheid
+                    below: 40
+                  - condition: numeric_state
+                    entity: sensor.linde_air_luchtvochtigheid
+                    above: 60
+                  - condition: numeric_state
+                    entity: sensor.linde_air_temperatuur
+                    below: 12
+                  - condition: numeric_state
+                    entity: sensor.linde_air_temperatuur
+                    above: 22
+                  - condition: numeric_state
+                    entity: sensor.jongens_air_kooldioxide
+                    above: 999
+                  - condition: numeric_state
+                    entity: sensor.jongens_air_pm2_5
+                    above: 9.9
+                  - condition: numeric_state
+                    entity: sensor.jongens_air_luchtvochtigheid
+                    below: 40
+                  - condition: numeric_state
+                    entity: sensor.jongens_air_luchtvochtigheid
+                    above: 60
+                  - condition: numeric_state
+                    entity: sensor.jongens_air_temperatuur
+                    below: 12
+                  - condition: numeric_state
+                    entity: sensor.jongens_air_temperatuur
+                    above: 22
+                  - condition: numeric_state
+                    entity: sensor.melanie_air_kooldioxide
+                    above: 999
+                  - condition: numeric_state
+                    entity: sensor.melanie_air_pm2_5
+                    above: 9.9
+                  - condition: numeric_state
+                    entity: sensor.melanie_air_luchtvochtigheid
+                    below: 40
+                  - condition: numeric_state
+                    entity: sensor.melanie_air_luchtvochtigheid
+                    above: 60
+                  - condition: numeric_state
+                    entity: sensor.melanie_air_temperatuur
+                    below: 12
+                  - condition: numeric_state
+                    entity: sensor.melanie_air_temperatuur
+                    above: 22
+                  - condition: numeric_state
+                    entity: sensor.merel_air_kooldioxide
+                    above: 999
+                  - condition: numeric_state
+                    entity: sensor.merel_air_pm2_5
+                    above: 9.9
+                  - condition: numeric_state
+                    entity: sensor.merel_air_luchtvochtigheid
+                    below: 40
+                  - condition: numeric_state
+                    entity: sensor.merel_air_luchtvochtigheid
+                    above: 60
+                  - condition: numeric_state
+                    entity: sensor.merel_air_temperatuur
+                    below: 12
+                  - condition: numeric_state
+                    entity: sensor.merel_air_temperatuur
+                    above: 22
+                  - condition: numeric_state
+                    entity: sensor.megan_air_kooldioxide
+                    above: 999
+                  - condition: numeric_state
+                    entity: sensor.megan_air_pm2_5
+                    above: 9.9
+                  - condition: numeric_state
+                    entity: sensor.megan_air_luchtvochtigheid
+                    below: 40
+                  - condition: numeric_state
+                    entity: sensor.megan_air_luchtvochtigheid
+                    above: 60
+                  - condition: numeric_state
+                    entity: sensor.megan_air_temperatuur
+                    below: 12
+                  - condition: numeric_state
+                    entity: sensor.megan_air_temperatuur
+                    above: 22
+            card:
+              type: heading
+              heading: Aandacht vereist
+              heading_style: title
+          - type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.woonkamer_air_kooldioxide
+                above: 999
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.woonkamer_air_kooldioxide
+              icon: mdi:molecule-co2
+              primary: ''
+              secondary: '{{ states(entity) | int }} ppm'
+              color: >
+                {% set state = states(entity) | int(0) %} {% if state < 1000
+                %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.woonkamer_air_pm2_5
+                above: 9.9
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.woonkamer_air_pm2_5
+              icon: mdi:air-filter
+              primary: ''
+              secondary: '{{ states(entity) | int }} µg/m³'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 10
+                %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.woonkamer_air_luchtvochtigheid
+                    below: 40
+                  - condition: numeric_state
+                    entity: sensor.woonkamer_air_luchtvochtigheid
+                    above: 60
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.woonkamer_air_luchtvochtigheid
+              icon: mdi:water-percent
+              primary: Luchtvochtigheid Woonkamer
+              secondary: '{{ states(entity) | int }} %'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 30 or
+                state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else
+                %}green{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.woonkamer_air_temperatuur
+                    below: 12
+                  - condition: numeric_state
+                    entity: sensor.woonkamer_air_temperatuur
+                    above: 22
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.woonkamer_air_temperatuur
+              icon: mdi:thermometer
+              primary: ''
+              secondary: '{{ states(entity) | float | round(1) }} °C'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 16
+                %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22
+                %}cyan{% else %}green{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.paula_michel_air_kooldioxide
+                above: 999
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.paula_michel_air_kooldioxide
+              icon: mdi:molecule-co2
+              primary: ''
+              secondary: '{{ states(entity) | int }} ppm'
+              color: >
+                {% set state = states(entity) | int(0) %} {% if state < 1000
+                %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.paula_michel_air_pm2_5
+                above: 9.9
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.paula_michel_air_pm2_5
+              icon: mdi:air-filter
+              primary: ''
+              secondary: '{{ states(entity) | int }} µg/m³'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 10
+                %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.paula_michel_air_luchtvochtigheid
+                    below: 40
+                  - condition: numeric_state
+                    entity: sensor.paula_michel_air_luchtvochtigheid
+                    above: 60
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.paula_michel_air_luchtvochtigheid
+              icon: mdi:water-percent
+              primary: Luchtvochtigheid Paula Michel
+              secondary: '{{ states(entity) | int }} %'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 30 or
+                state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else
+                %}green{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.paula_michel_air_temperatuur
+                    below: 12
+                  - condition: numeric_state
+                    entity: sensor.paula_michel_air_temperatuur
+                    above: 22
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.paula_michel_air_temperatuur
+              icon: mdi:thermometer
+              primary: ''
+              secondary: '{{ states(entity) | float | round(1) }} °C'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 16
+                %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22
+                %}cyan{% else %}green{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.linde_air_kooldioxide
+                above: 999
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.linde_air_kooldioxide
+              icon: mdi:molecule-co2
+              primary: ''
+              secondary: '{{ states(entity) | int }} ppm'
+              color: >
+                {% set state = states(entity) | int(0) %} {% if state < 1000
+                %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.linde_air_pm2_5
+                above: 9.9
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.linde_air_pm2_5
+              icon: mdi:air-filter
+              primary: ''
+              secondary: '{{ states(entity) | int }} µg/m³'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 10
+                %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.linde_air_luchtvochtigheid
+                    below: 40
+                  - condition: numeric_state
+                    entity: sensor.linde_air_luchtvochtigheid
+                    above: 60
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.linde_air_luchtvochtigheid
+              icon: mdi:water-percent
+              primary: Luchtvochtigheid Linde
+              secondary: '{{ states(entity) | int }} %'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 30 or
+                state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else
+                %}green{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.linde_air_temperatuur
+                    below: 12
+                  - condition: numeric_state
+                    entity: sensor.linde_air_temperatuur
+                    above: 22
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.linde_air_temperatuur
+              icon: mdi:thermometer
+              primary: ''
+              secondary: '{{ states(entity) | float | round(1) }} °C'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 16
+                %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22
+                %}cyan{% else %}green{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.jongens_air_kooldioxide
+                above: 999
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.jongens_air_kooldioxide
+              icon: mdi:molecule-co2
+              primary: ''
+              secondary: '{{ states(entity) | int }} ppm'
+              color: >
+                {% set state = states(entity) | int(0) %} {% if state < 1000
+                %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.jongens_air_pm2_5
+                above: 9.9
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.jongens_air_pm2_5
+              icon: mdi:air-filter
+              primary: ''
+              secondary: '{{ states(entity) | int }} µg/m³'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 10
+                %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.jongens_air_luchtvochtigheid
+                    below: 40
+                  - condition: numeric_state
+                    entity: sensor.jongens_air_luchtvochtigheid
+                    above: 60
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.jongens_air_luchtvochtigheid
+              icon: mdi:water-percent
+              primary: Luchtvochtigheid Jongens
+              secondary: '{{ states(entity) | int }} %'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 30 or
+                state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else
+                %}green{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.jongens_air_temperatuur
+                    below: 12
+                  - condition: numeric_state
+                    entity: sensor.jongens_air_temperatuur
+                    above: 22
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.jongens_air_temperatuur
+              icon: mdi:thermometer
+              primary: ''
+              secondary: '{{ states(entity) | float | round(1) }} °C'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 16
+                %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22
+                %}cyan{% else %}green{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.melanie_air_kooldioxide
+                above: 999
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.melanie_air_kooldioxide
+              icon: mdi:molecule-co2
+              primary: ''
+              secondary: '{{ states(entity) | int }} ppm'
+              color: >
+                {% set state = states(entity) | int(0) %} {% if state < 1000
+                %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.melanie_air_pm2_5
+                above: 9.9
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.melanie_air_pm2_5
+              icon: mdi:air-filter
+              primary: ''
+              secondary: '{{ states(entity) | int }} µg/m³'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 10
+                %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.melanie_air_luchtvochtigheid
+                    below: 40
+                  - condition: numeric_state
+                    entity: sensor.melanie_air_luchtvochtigheid
+                    above: 60
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.melanie_air_luchtvochtigheid
+              icon: mdi:water-percent
+              primary: Luchtvochtigheid Melanie
+              secondary: '{{ states(entity) | int }} %'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 30 or
+                state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else
+                %}green{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.melanie_air_temperatuur
+                    below: 12
+                  - condition: numeric_state
+                    entity: sensor.melanie_air_temperatuur
+                    above: 22
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.melanie_air_temperatuur
+              icon: mdi:thermometer
+              primary: ''
+              secondary: '{{ states(entity) | float | round(1) }} °C'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 16
+                %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22
+                %}cyan{% else %}green{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.merel_air_kooldioxide
+                above: 999
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.merel_air_kooldioxide
+              icon: mdi:molecule-co2
+              primary: ''
+              secondary: '{{ states(entity) | int }} ppm'
+              color: >
+                {% set state = states(entity) | int(0) %} {% if state < 1000
+                %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.merel_air_pm2_5
+                above: 9.9
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.merel_air_pm2_5
+              icon: mdi:air-filter
+              primary: ''
+              secondary: '{{ states(entity) | int }} µg/m³'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 10
+                %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.merel_air_luchtvochtigheid
+                    below: 40
+                  - condition: numeric_state
+                    entity: sensor.merel_air_luchtvochtigheid
+                    above: 60
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.merel_air_luchtvochtigheid
+              icon: mdi:water-percent
+              primary: Luchtvochtigheid Merel
+              secondary: '{{ states(entity) | int }} %'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 30 or
+                state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else
+                %}green{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.merel_air_temperatuur
+                    below: 12
+                  - condition: numeric_state
+                    entity: sensor.merel_air_temperatuur
+                    above: 22
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.merel_air_temperatuur
+              icon: mdi:thermometer
+              primary: ''
+              secondary: '{{ states(entity) | float | round(1) }} °C'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 16
+                %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22
+                %}cyan{% else %}green{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.megan_air_kooldioxide
+                above: 999
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.megan_air_kooldioxide
+              icon: mdi:molecule-co2
+              primary: ''
+              secondary: '{{ states(entity) | int }} ppm'
+              color: >
+                {% set state = states(entity) | int(0) %} {% if state < 1000
+                %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: numeric_state
+                entity: sensor.megan_air_pm2_5
+                above: 9.9
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.megan_air_pm2_5
+              icon: mdi:air-filter
+              primary: ''
+              secondary: '{{ states(entity) | int }} µg/m³'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 10
+                %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.megan_air_luchtvochtigheid
+                    below: 40
+                  - condition: numeric_state
+                    entity: sensor.megan_air_luchtvochtigheid
+                    above: 60
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.megan_air_luchtvochtigheid
+              icon: mdi:water-percent
+              primary: Luchtvochtigheid Megan
+              secondary: '{{ states(entity) | int }} %'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 30 or
+                state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else
+                %}green{% endif %}
+              tap_action:
+                action: more-info
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.megan_air_temperatuur
+                    below: 12
+                  - condition: numeric_state
+                    entity: sensor.megan_air_temperatuur
+                    above: 22
+            card:
+              type: custom:mushroom-template-card
+              entity: sensor.megan_air_temperatuur
+              icon: mdi:thermometer
+              primary: ''
+              secondary: '{{ states(entity) | float | round(1) }} °C'
+              color: >
+                {% set state = states(entity) | float(0) %} {% if state < 16
+                %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22
+                %}cyan{% else %}green{% endif %}
+              tap_action:
+                action: more-info
+        column_span: 1
+      - type: grid
+        card_mod:
+          style: |
+            ha-card {
+              max-width: 1200px;
+              margin: 0 auto;
+            }
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: heading
+                heading: Woonkamer
+              - type: grid
+                columns: 4
+                square: true
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: sensor.woonkamer_air_kooldioxide
+                    icon: mdi:molecule-co2
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} ppm'
+                    color: >
+                      {% set state = states(entity) | int(0) %}
+                      {% if state < 1000 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.woonkamer_air_pm2_5
+                    icon: mdi:air-filter
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} µg/m³'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 10 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.woonkamer_air_luchtvochtigheid
+                    icon: mdi:water-percent
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} %'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 30 or state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else %}green{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.woonkamer_air_temperatuur
+                    icon: mdi:thermometer
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | float | round(1) }} °C'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 16 %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22 %}cyan{% else %}green{% endif %}
+                    tap_action:
+                      action: more-info
+          - type: vertical-stack
+            cards:
+              - type: heading
+                heading: Slaapkamer Paula/Michel
+              - type: grid
+                columns: 4
+                square: true
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: sensor.paula_michel_air_kooldioxide
+                    icon: mdi:molecule-co2
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} ppm'
+                    color: >
+                      {% set state = states(entity) | int(0) %}
+                      {% if state < 1000 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.paula_michel_air_pm2_5
+                    icon: mdi:air-filter
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} µg/m³'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 10 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.paula_michel_air_luchtvochtigheid
+                    icon: mdi:water-percent
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} %'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 30 or state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else %}green{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.paula_michel_air_temperatuur
+                    icon: mdi:thermometer
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | float | round(1) }} °C'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 16 %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22 %}cyan{% else %}green{% endif %}
+                    tap_action:
+                      action: more-info
+          - type: vertical-stack
+            cards:
+              - type: heading
+                heading: Slaapkamer Megan
+              - type: grid
+                columns: 4
+                square: true
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: sensor.megan_air_kooldioxide
+                    icon: mdi:molecule-co2
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} ppm'
+                    color: >
+                      {% set state = states(entity) | int(0) %}
+                      {% if state < 1000 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.megan_air_pm2_5
+                    icon: mdi:air-filter
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} µg/m³'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 10 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.megan_air_luchtvochtigheid
+                    icon: mdi:water-percent
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} %'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 30 or state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else %}green{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.megan_air_temperatuur
+                    icon: mdi:thermometer
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | float | round(1) }} °C'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 16 %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22 %}cyan{% else %}green{% endif %}
+                    tap_action:
+                      action: more-info
+          - type: vertical-stack
+            cards:
+              - type: heading
+                heading: Slaapkamer Merel
+              - type: grid
+                columns: 4
+                square: true
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: sensor.merel_air_kooldioxide
+                    icon: mdi:molecule-co2
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} ppm'
+                    color: >
+                      {% set state = states(entity) | int(0) %}
+                      {% if state < 1000 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.merel_air_pm2_5
+                    icon: mdi:air-filter
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} µg/m³'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 10 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.merel_air_luchtvochtigheid
+                    icon: mdi:water-percent
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} %'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 30 or state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else %}green{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.merel_air_temperatuur
+                    icon: mdi:thermometer
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | float | round(1) }} °C'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 16 %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22 %}cyan{% else %}green{% endif %}
+                    tap_action:
+                      action: more-info
+          - type: vertical-stack
+            cards:
+              - type: heading
+                heading: Slaapkamer Melanie
+              - type: grid
+                columns: 4
+                square: true
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: sensor.melanie_air_kooldioxide
+                    icon: mdi:molecule-co2
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} ppm'
+                    color: >
+                      {% set state = states(entity) | int(0) %}
+                      {% if state < 1000 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.melanie_air_pm2_5
+                    icon: mdi:air-filter
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} µg/m³'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 10 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.melanie_air_luchtvochtigheid
+                    icon: mdi:water-percent
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} %'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 30 or state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else %}green{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.melanie_air_temperatuur
+                    icon: mdi:thermometer
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | float | round(1) }} °C'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 16 %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22 %}cyan{% else %}green{% endif %}
+                    tap_action:
+                      action: more-info
+          - type: vertical-stack
+            cards:
+              - type: heading
+                heading: Slaapkamer Jongens
+              - type: grid
+                columns: 4
+                square: true
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: sensor.jongens_air_kooldioxide
+                    icon: mdi:molecule-co2
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} ppm'
+                    color: >
+                      {% set state = states(entity) | int(0) %}
+                      {% if state < 1000 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.jongens_air_pm2_5
+                    icon: mdi:air-filter
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} µg/m³'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 10 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.jongens_air_luchtvochtigheid
+                    icon: mdi:water-percent
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} %'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 30 or state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else %}green{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.jongens_air_temperatuur
+                    icon: mdi:thermometer
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | float | round(1) }} °C'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 16 %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22 %}cyan{% else %}green{% endif %}
+                    tap_action:
+                      action: more-info
+          - type: vertical-stack
+            cards:
+              - type: heading
+                heading: Slaapkamer Linde
+              - type: grid
+                columns: 4
+                square: true
+                cards:
+                  - type: custom:mushroom-template-card
+                    entity: sensor.linde_air_kooldioxide
+                    icon: mdi:molecule-co2
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} ppm'
+                    color: >
+                      {% set state = states(entity) | int(0) %}
+                      {% if state < 1000 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.linde_air_pm2_5
+                    icon: mdi:air-filter
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} µg/m³'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 10 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.linde_air_luchtvochtigheid
+                    icon: mdi:water-percent
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | int }} %'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 30 or state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else %}green{% endif %}
+                    tap_action:
+                      action: more-info
+                  - type: custom:mushroom-template-card
+                    entity: sensor.linde_air_temperatuur
+                    icon: mdi:thermometer
+                    layout: vertical
+                    primary: ''
+                    secondary: '{{ states(entity) | float | round(1) }} °C'
+                    color: >
+                      {% set state = states(entity) | float(0) %}
+                      {% if state < 16 %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22 %}cyan{% else %}green{% endif %}
+                    tap_action:
+                      action: more-info
