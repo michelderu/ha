@@ -11,6 +11,13 @@ views:
               margin: 0 auto;
             }
         cards:
+          # Show current weather card
+          - show_current: true
+            show_forecast: false
+            type: weather-forecast
+            entity: weather.forecast_thuis
+            forecast_type: daily
+          # Show "Het binnenklimaat is prima ✓" card if all sensors are in good condition
           - type: conditional
             conditions:
               - condition: not
@@ -145,8 +152,9 @@ views:
                         above: 22
             card:
               type: heading
-              heading: Alles ziet er goed uit ✓
+              heading: Het binnenklimaat is prima ✓
               heading_style: title
+          # Show "Aandacht vereist" card if any sensor is not in good condition
           - type: conditional
             conditions:
               - condition: or
@@ -281,7 +289,8 @@ views:
               type: heading
               heading: Aandacht vereist
               heading_style: title
-          - type: conditional
+          # Start alerts
+          - type: conditional # CO2 Woonkamer
             conditions:
               - condition: numeric_state
                 entity: sensor.woonkamer_air_kooldioxide
@@ -290,14 +299,14 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.woonkamer_air_kooldioxide
               icon: mdi:molecule-co2
-              primary: ''
+              primary: CO2 Woonkamer
               secondary: '{{ states(entity) | int }} ppm'
               color: >
                 {% set state = states(entity) | int(0) %} {% if state < 1000
                 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Fijnstof Woonkamer
             conditions:
               - condition: numeric_state
                 entity: sensor.woonkamer_air_pm2_5
@@ -306,14 +315,14 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.woonkamer_air_pm2_5
               icon: mdi:air-filter
-              primary: ''
+              primary: Fijnstof Woonkamer
               secondary: '{{ states(entity) | int }} µg/m³'
               color: >
                 {% set state = states(entity) | float(0) %} {% if state < 10
                 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Luchtvochtigheid Woonkamer
             conditions:
               - condition: or
                 conditions:
@@ -335,7 +344,7 @@ views:
                 %}green{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Temperatuur Woonkamer
             conditions:
               - condition: or
                 conditions:
@@ -349,7 +358,7 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.woonkamer_air_temperatuur
               icon: mdi:thermometer
-              primary: ''
+              primary: Temperatuur Woonkamer
               secondary: '{{ states(entity) | float | round(1) }} °C'
               color: >
                 {% set state = states(entity) | float(0) %} {% if state < 16
@@ -357,7 +366,7 @@ views:
                 %}cyan{% else %}green{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # CO2 Paula/Michel
             conditions:
               - condition: numeric_state
                 entity: sensor.paula_michel_air_kooldioxide
@@ -366,14 +375,14 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.paula_michel_air_kooldioxide
               icon: mdi:molecule-co2
-              primary: ''
+              primary: CO2 Paula/Michel
               secondary: '{{ states(entity) | int }} ppm'
               color: >
                 {% set state = states(entity) | int(0) %} {% if state < 1000
                 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Fijnstof Paula/Michel
             conditions:
               - condition: numeric_state
                 entity: sensor.paula_michel_air_pm2_5
@@ -382,14 +391,14 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.paula_michel_air_pm2_5
               icon: mdi:air-filter
-              primary: ''
+              primary: Fijnstof Paula/Michel
               secondary: '{{ states(entity) | int }} µg/m³'
               color: >
                 {% set state = states(entity) | float(0) %} {% if state < 10
                 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Luchtvochtigheid Paula/Michel
             conditions:
               - condition: or
                 conditions:
@@ -403,7 +412,7 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.paula_michel_air_luchtvochtigheid
               icon: mdi:water-percent
-              primary: Luchtvochtigheid Paula Michel
+              primary: Luchtvochtigheid Paula/Michel
               secondary: '{{ states(entity) | int }} %'
               color: >
                 {% set state = states(entity) | float(0) %} {% if state < 30 or
@@ -411,7 +420,7 @@ views:
                 %}green{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Temperatuur Paula/Michel
             conditions:
               - condition: or
                 conditions:
@@ -425,7 +434,7 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.paula_michel_air_temperatuur
               icon: mdi:thermometer
-              primary: ''
+              primary: Temperatuur Paula/Michel
               secondary: '{{ states(entity) | float | round(1) }} °C'
               color: >
                 {% set state = states(entity) | float(0) %} {% if state < 16
@@ -433,7 +442,7 @@ views:
                 %}cyan{% else %}green{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # CO2 Linde
             conditions:
               - condition: numeric_state
                 entity: sensor.linde_air_kooldioxide
@@ -442,14 +451,14 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.linde_air_kooldioxide
               icon: mdi:molecule-co2
-              primary: ''
+              primary: CO2 Linde
               secondary: '{{ states(entity) | int }} ppm'
               color: >
                 {% set state = states(entity) | int(0) %} {% if state < 1000
                 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Fijnstof Linde
             conditions:
               - condition: numeric_state
                 entity: sensor.linde_air_pm2_5
@@ -458,14 +467,14 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.linde_air_pm2_5
               icon: mdi:air-filter
-              primary: ''
+              primary: Fijnstof Linde
               secondary: '{{ states(entity) | int }} µg/m³'
               color: >
                 {% set state = states(entity) | float(0) %} {% if state < 10
                 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Luchtvochtigheid Linde
             conditions:
               - condition: or
                 conditions:
@@ -487,7 +496,7 @@ views:
                 %}green{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Temperatuur Linde
             conditions:
               - condition: or
                 conditions:
@@ -501,7 +510,7 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.linde_air_temperatuur
               icon: mdi:thermometer
-              primary: ''
+              primary: Temperatuur Linde
               secondary: '{{ states(entity) | float | round(1) }} °C'
               color: >
                 {% set state = states(entity) | float(0) %} {% if state < 16
@@ -509,7 +518,7 @@ views:
                 %}cyan{% else %}green{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # CO2 Jongens
             conditions:
               - condition: numeric_state
                 entity: sensor.jongens_air_kooldioxide
@@ -518,14 +527,14 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.jongens_air_kooldioxide
               icon: mdi:molecule-co2
-              primary: ''
+              primary: CO2 Jongens
               secondary: '{{ states(entity) | int }} ppm'
               color: >
                 {% set state = states(entity) | int(0) %} {% if state < 1000
                 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Fijnstof Jongens
             conditions:
               - condition: numeric_state
                 entity: sensor.jongens_air_pm2_5
@@ -534,14 +543,14 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.jongens_air_pm2_5
               icon: mdi:air-filter
-              primary: ''
+              primary: Fijnstof Jongens
               secondary: '{{ states(entity) | int }} µg/m³'
               color: >
                 {% set state = states(entity) | float(0) %} {% if state < 10
                 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Luchtvochtigheid Jongens
             conditions:
               - condition: or
                 conditions:
@@ -563,7 +572,7 @@ views:
                 %}green{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Temperatuur Jongens
             conditions:
               - condition: or
                 conditions:
@@ -577,7 +586,7 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.jongens_air_temperatuur
               icon: mdi:thermometer
-              primary: ''
+              primary: Temperatuur Jongens
               secondary: '{{ states(entity) | float | round(1) }} °C'
               color: >
                 {% set state = states(entity) | float(0) %} {% if state < 16
@@ -585,7 +594,7 @@ views:
                 %}cyan{% else %}green{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # CO2 Melanie
             conditions:
               - condition: numeric_state
                 entity: sensor.melanie_air_kooldioxide
@@ -594,14 +603,14 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.melanie_air_kooldioxide
               icon: mdi:molecule-co2
-              primary: ''
+              primary: CO2 Melanie
               secondary: '{{ states(entity) | int }} ppm'
               color: >
                 {% set state = states(entity) | int(0) %} {% if state < 1000
                 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Fijnstof Melanie
             conditions:
               - condition: numeric_state
                 entity: sensor.melanie_air_pm2_5
@@ -610,14 +619,14 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.melanie_air_pm2_5
               icon: mdi:air-filter
-              primary: ''
+              primary: Fijnstof Melanie
               secondary: '{{ states(entity) | int }} µg/m³'
               color: >
                 {% set state = states(entity) | float(0) %} {% if state < 10
                 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Luchtvochtigheid Melanie
             conditions:
               - condition: or
                 conditions:
@@ -639,7 +648,7 @@ views:
                 %}green{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Temperatuur Melanie
             conditions:
               - condition: or
                 conditions:
@@ -653,7 +662,7 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.melanie_air_temperatuur
               icon: mdi:thermometer
-              primary: ''
+              primary: Temperatuur Melanie
               secondary: '{{ states(entity) | float | round(1) }} °C'
               color: >
                 {% set state = states(entity) | float(0) %} {% if state < 16
@@ -661,7 +670,7 @@ views:
                 %}cyan{% else %}green{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # CO2 Merel
             conditions:
               - condition: numeric_state
                 entity: sensor.merel_air_kooldioxide
@@ -670,14 +679,14 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.merel_air_kooldioxide
               icon: mdi:molecule-co2
-              primary: ''
+              primary: CO2 Merel
               secondary: '{{ states(entity) | int }} ppm'
               color: >
                 {% set state = states(entity) | int(0) %} {% if state < 1000
                 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Fijnstof Merel
             conditions:
               - condition: numeric_state
                 entity: sensor.merel_air_pm2_5
@@ -686,14 +695,14 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.merel_air_pm2_5
               icon: mdi:air-filter
-              primary: ''
+              primary: Fijnstof Merel
               secondary: '{{ states(entity) | int }} µg/m³'
               color: >
                 {% set state = states(entity) | float(0) %} {% if state < 10
                 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Luchtvochtigheid Merel
             conditions:
               - condition: or
                 conditions:
@@ -715,7 +724,7 @@ views:
                 %}green{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Temperatuur Merel
             conditions:
               - condition: or
                 conditions:
@@ -729,7 +738,7 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.merel_air_temperatuur
               icon: mdi:thermometer
-              primary: ''
+              primary: Temperatuur Merel
               secondary: '{{ states(entity) | float | round(1) }} °C'
               color: >
                 {% set state = states(entity) | float(0) %} {% if state < 16
@@ -737,7 +746,7 @@ views:
                 %}cyan{% else %}green{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # CO2 Megan
             conditions:
               - condition: numeric_state
                 entity: sensor.megan_air_kooldioxide
@@ -746,14 +755,14 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.megan_air_kooldioxide
               icon: mdi:molecule-co2
-              primary: ''
+              primary: CO2 Megan
               secondary: '{{ states(entity) | int }} ppm'
               color: >
                 {% set state = states(entity) | int(0) %} {% if state < 1000
                 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Fijnstof Megan
             conditions:
               - condition: numeric_state
                 entity: sensor.megan_air_pm2_5
@@ -762,14 +771,14 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.megan_air_pm2_5
               icon: mdi:air-filter
-              primary: ''
+              primary: Fijnstof Megan
               secondary: '{{ states(entity) | int }} µg/m³'
               color: >
                 {% set state = states(entity) | float(0) %} {% if state < 10
                 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Luchtvochtigheid Megan
             conditions:
               - condition: or
                 conditions:
@@ -791,7 +800,7 @@ views:
                 %}green{% endif %}
               tap_action:
                 action: more-info
-          - type: conditional
+          - type: conditional # Temperatuur Megan
             conditions:
               - condition: or
                 conditions:
@@ -805,7 +814,7 @@ views:
               type: custom:mushroom-template-card
               entity: sensor.megan_air_temperatuur
               icon: mdi:thermometer
-              primary: ''
+              primary: Temperatuur Megan
               secondary: '{{ states(entity) | float | round(1) }} °C'
               color: >
                 {% set state = states(entity) | float(0) %} {% if state < 16
@@ -814,6 +823,7 @@ views:
               tap_action:
                 action: more-info
         column_span: 1
+      # Start of sensor cards per room
       - type: grid
         card_mod:
           style: |
@@ -822,7 +832,7 @@ views:
               margin: 0 auto;
             }
         cards:
-          - type: vertical-stack
+          - type: vertical-stack # Woonkamer cards
             cards:
               - type: heading
                 heading: Woonkamer
@@ -837,8 +847,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} ppm'
                     color: >
-                      {% set state = states(entity) | int(0) %}
-                      {% if state < 1000 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+                      {% set state = states(entity) | int(0) %} {% if state <
+                      1000 %}green{% elif state < 1500 %}orange{% else %}red{%
+                      endif %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -848,8 +859,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} µg/m³'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 10 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      10 %}green{% elif state < 25 %}orange{% else %}red{% endif
+                      %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -859,8 +871,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} %'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 30 or state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else %}green{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      30 or state > 70 %}red{% elif state < 40 or state > 60
+                      %}orange{% else %}green{% endif %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -870,11 +883,12 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | float | round(1) }} °C'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 16 %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22 %}cyan{% else %}green{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      16 %}blue{% elif state > 25 %}red{% elif state < 18 or
+                      state > 22 %}cyan{% else %}green{% endif %}
                     tap_action:
                       action: more-info
-          - type: vertical-stack
+          - type: vertical-stack # Paula/Michel cards
             cards:
               - type: heading
                 heading: Slaapkamer Paula/Michel
@@ -882,6 +896,7 @@ views:
                 columns: 4
                 square: true
                 cards:
+
                   - type: custom:mushroom-template-card
                     entity: sensor.paula_michel_air_kooldioxide
                     icon: mdi:molecule-co2
@@ -889,8 +904,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} ppm'
                     color: >
-                      {% set state = states(entity) | int(0) %}
-                      {% if state < 1000 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+                      {% set state = states(entity) | int(0) %} {% if state <
+                      1000 %}green{% elif state < 1500 %}orange{% else %}red{%
+                      endif %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -900,8 +916,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} µg/m³'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 10 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      10 %}green{% elif state < 25 %}orange{% else %}red{% endif
+                      %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -911,8 +928,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} %'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 30 or state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else %}green{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      30 or state > 70 %}red{% elif state < 40 or state > 60
+                      %}orange{% else %}green{% endif %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -922,11 +940,12 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | float | round(1) }} °C'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 16 %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22 %}cyan{% else %}green{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      16 %}blue{% elif state > 25 %}red{% elif state < 18 or
+                      state > 22 %}cyan{% else %}green{% endif %}
                     tap_action:
                       action: more-info
-          - type: vertical-stack
+          - type: vertical-stack # Megan cards
             cards:
               - type: heading
                 heading: Slaapkamer Megan
@@ -941,8 +960,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} ppm'
                     color: >
-                      {% set state = states(entity) | int(0) %}
-                      {% if state < 1000 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+                      {% set state = states(entity) | int(0) %} {% if state <
+                      1000 %}green{% elif state < 1500 %}orange{% else %}red{%
+                      endif %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -952,8 +972,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} µg/m³'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 10 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      10 %}green{% elif state < 25 %}orange{% else %}red{% endif
+                      %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -963,8 +984,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} %'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 30 or state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else %}green{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      30 or state > 70 %}red{% elif state < 40 or state > 60
+                      %}orange{% else %}green{% endif %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -974,11 +996,12 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | float | round(1) }} °C'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 16 %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22 %}cyan{% else %}green{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      16 %}blue{% elif state > 25 %}red{% elif state < 18 or
+                      state > 22 %}cyan{% else %}green{% endif %}
                     tap_action:
                       action: more-info
-          - type: vertical-stack
+          - type: vertical-stack # Merel cards
             cards:
               - type: heading
                 heading: Slaapkamer Merel
@@ -993,8 +1016,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} ppm'
                     color: >
-                      {% set state = states(entity) | int(0) %}
-                      {% if state < 1000 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+                      {% set state = states(entity) | int(0) %} {% if state <
+                      1000 %}green{% elif state < 1500 %}orange{% else %}red{%
+                      endif %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -1004,8 +1028,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} µg/m³'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 10 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      10 %}green{% elif state < 25 %}orange{% else %}red{% endif
+                      %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -1015,8 +1040,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} %'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 30 or state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else %}green{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      30 or state > 70 %}red{% elif state < 40 or state > 60
+                      %}orange{% else %}green{% endif %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -1026,11 +1052,12 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | float | round(1) }} °C'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 16 %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22 %}cyan{% else %}green{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      16 %}blue{% elif state > 25 %}red{% elif state < 18 or
+                      state > 22 %}cyan{% else %}green{% endif %}
                     tap_action:
                       action: more-info
-          - type: vertical-stack
+          - type: vertical-stack # Melanie cards
             cards:
               - type: heading
                 heading: Slaapkamer Melanie
@@ -1045,8 +1072,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} ppm'
                     color: >
-                      {% set state = states(entity) | int(0) %}
-                      {% if state < 1000 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+                      {% set state = states(entity) | int(0) %} {% if state <
+                      1000 %}green{% elif state < 1500 %}orange{% else %}red{%
+                      endif %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -1056,8 +1084,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} µg/m³'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 10 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      10 %}green{% elif state < 25 %}orange{% else %}red{% endif
+                      %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -1067,8 +1096,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} %'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 30 or state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else %}green{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      30 or state > 70 %}red{% elif state < 40 or state > 60
+                      %}orange{% else %}green{% endif %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -1078,11 +1108,12 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | float | round(1) }} °C'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 16 %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22 %}cyan{% else %}green{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      16 %}blue{% elif state > 25 %}red{% elif state < 18 or
+                      state > 22 %}cyan{% else %}green{% endif %}
                     tap_action:
                       action: more-info
-          - type: vertical-stack
+          - type: vertical-stack # Jongens cards
             cards:
               - type: heading
                 heading: Slaapkamer Jongens
@@ -1097,8 +1128,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} ppm'
                     color: >
-                      {% set state = states(entity) | int(0) %}
-                      {% if state < 1000 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+                      {% set state = states(entity) | int(0) %} {% if state <
+                      1000 %}green{% elif state < 1500 %}orange{% else %}red{%
+                      endif %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -1108,8 +1140,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} µg/m³'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 10 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      10 %}green{% elif state < 25 %}orange{% else %}red{% endif
+                      %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -1119,8 +1152,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} %'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 30 or state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else %}green{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      30 or state > 70 %}red{% elif state < 40 or state > 60
+                      %}orange{% else %}green{% endif %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -1130,11 +1164,12 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | float | round(1) }} °C'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 16 %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22 %}cyan{% else %}green{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      16 %}blue{% elif state > 25 %}red{% elif state < 18 or
+                      state > 22 %}cyan{% else %}green{% endif %}
                     tap_action:
                       action: more-info
-          - type: vertical-stack
+          - type: vertical-stack # Linde cards
             cards:
               - type: heading
                 heading: Slaapkamer Linde
@@ -1149,8 +1184,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} ppm'
                     color: >
-                      {% set state = states(entity) | int(0) %}
-                      {% if state < 1000 %}green{% elif state < 1500 %}orange{% else %}red{% endif %}
+                      {% set state = states(entity) | int(0) %} {% if state <
+                      1000 %}green{% elif state < 1500 %}orange{% else %}red{%
+                      endif %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -1160,8 +1196,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} µg/m³'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 10 %}green{% elif state < 25 %}orange{% else %}red{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      10 %}green{% elif state < 25 %}orange{% else %}red{% endif
+                      %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -1171,8 +1208,9 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | int }} %'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 30 or state > 70 %}red{% elif state < 40 or state > 60 %}orange{% else %}green{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      30 or state > 70 %}red{% elif state < 40 or state > 60
+                      %}orange{% else %}green{% endif %}
                     tap_action:
                       action: more-info
                   - type: custom:mushroom-template-card
@@ -1182,7 +1220,8 @@ views:
                     primary: ''
                     secondary: '{{ states(entity) | float | round(1) }} °C'
                     color: >
-                      {% set state = states(entity) | float(0) %}
-                      {% if state < 16 %}blue{% elif state > 25 %}red{% elif state < 18 or state > 22 %}cyan{% else %}green{% endif %}
+                      {% set state = states(entity) | float(0) %} {% if state <
+                      16 %}blue{% elif state > 25 %}red{% elif state < 18 or
+                      state > 22 %}cyan{% else %}green{% endif %}
                     tap_action:
                       action: more-info

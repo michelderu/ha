@@ -121,7 +121,7 @@ automation:
                   title: "🪟 Woonkamer: Luchten eindigen"
                   message: >-
                     Luchtkwaliteit is goed: CO2 {{ co2 }} ppm, 
-                    PM2.5 {{ pm25 }} µg/m³, {{ temp }}°C, {{ humidity }}%
+                    Fijnstof {{ pm25 }} µg/m³, {{ temp }}°C, {{ humidity }}%
                   data:
                     channel: ventilation_alerts
                     importance: default
