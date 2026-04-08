@@ -1,0 +1,111 @@
+# De stroomprijs per kilowattuur (kWh) bestaat uit:
+# - De inkoopprijs op de beurs, verschilt per uur/kwartier (Nordpool)
+# - Inkoopvergoeding, verschilt per energieleverancier
+# - Energiebelasting: € 0,09161 per kWh, excl. BTW / € 0,11085 per kWh, incl. BTW
+# - 21% BTW
+#
+# Vanaf 01-01-2027:
+# - Inkoop (Verbruik):
+#   Over elke kWh die je van het net haalt, betaal je de volledige prijs:
+#   (Beursprijs + Inkoopvergoeding + Energiebelasting) + BTW.
+# - Teruglevering (Opbrengst):
+#   Over de stroom die je teruglevert, krijg je geen energiebelasting meer terug. Je ontvangt alleen een vergoeding van je leverancier (bij dynamisch vaak de kale beursprijs).
+#   Beursprijs – Inkoopvergoeding
+
+input_number:
+  # Helper om de inkoopvergoeding voor dynamische stroom te configureren
+  # 0,0104 bij Budget Energie in 2026
+  inkoopvergoeding_dynamische_stroom:
+    name: Inkoopvergoeding dynamische stroom 
+    icon: mdi:currency-eur
+    min: 0
+    max: 1
+    step: 0.0001
+    unit_of_measurement: 'EUR/kWh'
+    initial: 0.0104 # 2026
+
+  # Helper om de energiebelasting ex. BTW voor dynamische stroom te configureren
+  # 0,09161 per kWh, excl. BTW
+  energiebelasting_dynamische_stroom:
+    name: Energiebelasting dynamische stroom 
+    icon: mdi:currency-eur
+    min: 0
+    max: 1
+    step: 0.00001
+    unit_of_measurement: 'EUR/kWh'
+    initial: 0.09161 # 2026
+
+  # Helper om de BTW voor dynamische stroom te configureren (geldt over alle prijzen)
+  btw_dynamische_stroom:
+    name: BTW dynamische stroom 
+    icon: mdi:percentage
+    min: 0
+    max: 1
+    step: 0.01
+    unit_of_measurement: '%'
+    initial: 0.21
+
+template:
+  - sensor:
+    - name: "Dynamische energieprijzen netto"
+      unique_id: "dynamische_energieprijzen_netto"
+      icon: mdi:swap-vertical
+      unit_of_measurement: "€/kWh"
+      state: >
+        {% set beursprijs = states('sensor.nordpool_kwh_nl_eur_3_10_0') | float(0) %}
+        {% set inkoopvergoeding = states('input_number.inkoopvergoeding_dynamische_stroom') | float(0) %}
+        {% set energiebelasting = states('input_number.energiebelasting_dynamische_stroom') | float(0) %}
+        {% set btw = states('input_number.btw_dynamische_stroom') | float(0) %}
+        {{ ((beursprijs + inkoopvergoeding + energiebelasting) * (1 + btw)) | round(3) }}
+      attributes:
+        times: >
+          {% set bron_sensor = 'sensor.nordpool_kwh_nl_eur_3_10_0' %}
+          {% set ns = namespace(times=[]) %}
+          {% for period in ['raw_today', 'raw_tomorrow'] %}
+            {% set prijs_data = state_attr(bron_sensor, period) %}
+            {% if prijs_data is not none %}
+              {% for uur in prijs_data %}
+                {% set ns.times = ns.times + [as_local(as_datetime(uur.start)).strftime("%Y-%m-%d %H:%M:%S")] %}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+          {{ ns.times }}
+        prijzen_spot: >
+          {% set ns = namespace(prices=[]) %}
+          {% for period in ['raw_today', 'raw_tomorrow'] %}
+            {% set prijs_data = state_attr('sensor.nordpool_kwh_nl_eur_3_10_0', period) %}
+            {% if prijs_data is not none %}
+              {% for uur in prijs_data %}
+                {% set ns.prices = ns.prices + [uur.value | round(4)] %}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+          {{ ns.prices }}
+        prijzen_inkoop: >
+          {% set inkoopvergoeding = states('input_number.inkoopvergoeding_dynamische_stroom') | float(0) %}
+          {% set energiebelasting = states('input_number.energiebelasting_dynamische_stroom') | float(0) %}
+          {% set btw = states('input_number.btw_dynamische_stroom') | float(0) %}
+          {% set ns = namespace(prices=[]) %}
+          {% for period in ['raw_today', 'raw_tomorrow'] %}
+            {% set prijs_data = state_attr('sensor.nordpool_kwh_nl_eur_3_10_0', period) %}
+            {% if prijs_data is not none %}
+              {% for uur in prijs_data %}
+                {% set prijs = ((uur.value + inkoopvergoeding + energiebelasting) * (1 + btw)) | round(4) %}
+                {% set ns.prices = ns.prices + [prijs] %}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+          {{ ns.prices }}
+        prijzen_teruglevering: >
+          {% set inkoopvergoeding = states('input_number.inkoopvergoeding_dynamische_stroom') | float(0) %}
+          {% set ns = namespace(prices=[]) %}
+          {% for period in ['raw_today', 'raw_tomorrow'] %}
+            {% set prijs_data = state_attr('sensor.nordpool_kwh_nl_eur_3_10_0', period) %}
+            {% if prijs_data is not none %}
+              {% for uur in prijs_data %}
+                {% set prijs = (uur.value - inkoopvergoeding) | round(4) %}
+                {% set ns.prices = ns.prices + [prijs] %}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+          {{ ns.prices }}
